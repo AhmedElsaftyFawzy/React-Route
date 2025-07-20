@@ -7,9 +7,6 @@ export const Portfolio = () => {
   const [selectedImage, setSelectedImage] = useState(null)
   useEffect(() => {
     document.title = `Portfolio`
-    return () => {
-      document.title = "Portfolio"
-    }
   }, [])
   const images = [image1, image2, image3, image1, image2, image3]
   return (

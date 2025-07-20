@@ -3,9 +3,6 @@ import { useEffect } from "react"
 export const About = () => {
   useEffect(() => {
     document.title = `About`
-    return () => {
-      document.title = "About"
-    }
   }, [])
   return (
     <div className="about d-flex flex-column justify-content-center align-items-center min-vh-100">

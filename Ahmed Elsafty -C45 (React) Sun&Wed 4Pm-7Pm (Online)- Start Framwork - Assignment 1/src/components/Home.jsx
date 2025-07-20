@@ -4,9 +4,6 @@ import avatar from "../assets/avataaars.svg"
 export const Home = () => {
   useEffect(() => {
     document.title = `Home`
-    return () => {
-      document.title = "Home"
-    }
   }, [])
   return (
     <div className="home d-flex flex-column justify-content-center align-items-center min-vh-100">
