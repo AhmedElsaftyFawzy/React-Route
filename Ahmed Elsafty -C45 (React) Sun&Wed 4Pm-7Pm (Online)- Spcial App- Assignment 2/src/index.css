@@ -1,0 +1,48 @@
+@import "tailwindcss";
+.active {
+  @apply text-blue-500;
+}
+body {
+  @apply bg-gradient-to-br from-[#E07FFF] via-[#FDFCFD] to-[#C1CFFE];
+}
+.loader {
+  width: 40rem;
+  height: 150px;
+  display: block;
+  margin: auto;
+  position: relative;
+  background: #fff;
+  box-sizing: border-box;
+}
+.loader::after {
+  content: "";
+  width: calc(100% - 30px);
+  height: calc(100% - 30px);
+  top: 15px;
+  left: 15px;
+  position: absolute;
+  background-image: linear-gradient(
+      100deg,
+      transparent,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent 80%
+    ),
+    radial-gradient(circle 28px at 28px 28px, #ddd 99%, transparent 0),
+    linear-gradient(#ddd 24px, transparent 0),
+    linear-gradient(#ddd 18px, transparent 0),
+    linear-gradient(#ddd 66px, transparent 0);
+  background-repeat: no-repeat;
+  background-size: 150px 260px, 110px 112px, 320px 60px, 520px 40px, 580px 120px;
+  background-position: 0% 0, 0 0, 70px 5px, 70px 38px, 0px 66px;
+  box-sizing: border-box;
+  animation: animloader 1s linear infinite;
+}
+
+@keyframes animloader {
+  0% {
+    background-position: 0% 0, 0 0, 70px 5px, 70px 38px, 0px 66px;
+  }
+  100% {
+    background-position: 150% 0, 0 0, 70px 5px, 70px 38px, 0px 66px;
+  }
+}
