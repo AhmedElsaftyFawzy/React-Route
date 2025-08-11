@@ -37,14 +37,14 @@ const PostDetails = () => {
             <i className="fa-solid fa-arrow-left-long"></i>
           </Link>
           <div className="mx-auto my-20 max-w-2xl p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <div className=" flex justify-start items-center gap-10 text-white">
+            <div className=" flex justify-start items-center gap-10 dark:text-white">
               <img src={post.user.photo} alt="" className="w-25" />
               <div>
                 <p>{post.user.name}</p>
                 <p>{new Date(post.createdAt).toLocaleString()}</p>
               </div>
             </div>
-            <p className="text-white py-10">{post.body}</p>
+            <p className="dark:text-white py-10">{post.body}</p>
             {post.image ? <img src={post.image} alt="" /> : null}
             {post.comments.map((comment) => {
               return (

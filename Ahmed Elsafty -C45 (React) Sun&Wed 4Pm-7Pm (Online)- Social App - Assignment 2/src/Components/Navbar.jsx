@@ -79,7 +79,7 @@ export const Navbar = () => {
                       <div>{user.name}</div>
                     </div>
                     <Link to="/edit" className="ms-5">
-                      <i className="fa-solid fa-gears text-white"></i>
+                      <i className="fa-solid fa-gears dark:text-white"></i>
                     </Link>
                     <button
                       className="ms-5 cursor-pointer"
@@ -87,7 +87,7 @@ export const Navbar = () => {
                         handleLogout()
                       }}
                     >
-                      <i className="fa-solid fa-right-from-bracket text-white"></i>
+                      <i className="fa-solid fa-right-from-bracket dark:text-white"></i>
                     </button>
                   </div>
                 </>

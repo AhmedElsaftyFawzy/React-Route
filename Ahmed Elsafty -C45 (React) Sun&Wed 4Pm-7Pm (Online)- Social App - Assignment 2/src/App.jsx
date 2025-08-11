@@ -11,8 +11,11 @@ import { UserProvider } from "./Context/UserContext"
 import { Edit } from "./Pages/Edit"
 import { ProtectedRoute } from "./Components/ProtectedRoute"
 import { PreventiveRoute } from "./Components/PreventiveRoute"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 
 function App() {
+  const queryClient = new QueryClient()
   const route = createBrowserRouter([
     {
       path: "",
@@ -66,8 +69,11 @@ function App() {
   return (
     <>
       <UserProvider>
-        <RouterProvider router={route}></RouterProvider>
-        <Toaster></Toaster>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <RouterProvider router={route}></RouterProvider>
+          <Toaster></Toaster>
+        </QueryClientProvider>
       </UserProvider>
     </>
   )
