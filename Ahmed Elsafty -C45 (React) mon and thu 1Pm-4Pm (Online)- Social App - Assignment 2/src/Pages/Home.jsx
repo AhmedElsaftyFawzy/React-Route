@@ -67,7 +67,7 @@ export const Home = () => {
                       <p>{new Date(post.createdAt).toLocaleString()}</p>
                     </div>
                   </div>
-                  {user._id === post.user._id ? (
+                  {user?._id === post.user._id ? (
                     <PostEdit postId={post._id} postBody={post.body} />
                   ) : null}
                 </div>

@@ -38,7 +38,6 @@ export const Login = () => {
   }, [])
 
   async function handleLogin(value) {
-    console.log(value)
     await axios
       .post("https://linked-posts.routemisr.com/users/signin", value)
       .then((response) => {
