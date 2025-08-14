@@ -20,7 +20,7 @@ export const Edit = () => {
         getUserData()
         toast.success("Upload Profile Picture Successfully")
       })
-      .catch((err) => console.log(err.message))
+      .catch((err) => console.log(err.response.data.error))
   }
   return (
     <>

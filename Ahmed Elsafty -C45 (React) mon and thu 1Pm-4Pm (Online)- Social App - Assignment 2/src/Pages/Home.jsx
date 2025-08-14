@@ -11,7 +11,7 @@ import { UserContext } from "../Context/UserContext"
 import { useQuery } from "@tanstack/react-query"
 
 export const Home = () => {
-  const [info, setInfo] = useState("")
+  const [info, setInfo] = useState({ numberOfPages: 1 })
   const [page, setPage] = useState(info.currentPage || 1)
   const { user } = useContext(UserContext)
 
