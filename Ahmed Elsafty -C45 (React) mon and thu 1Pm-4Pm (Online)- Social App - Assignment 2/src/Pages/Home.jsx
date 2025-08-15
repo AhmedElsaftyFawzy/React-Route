@@ -42,6 +42,7 @@ export const Home = () => {
 
   if (isError) {
     setLoading(false)
+    localStorage.removeItem("token")
     navigate("/login")
     return (
       <h2 className="mt-20 text-center capitalize text-red-500 font-extrabold text-5xl">
