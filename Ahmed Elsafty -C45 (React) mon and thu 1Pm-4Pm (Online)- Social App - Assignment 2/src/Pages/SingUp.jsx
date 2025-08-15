@@ -22,7 +22,7 @@ const schema = zod
       .string()
       .nonempty("Password Is Required")
       .regex(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+-=])[A-Za-z\d!@#$%^&*()_+-=]{8,}$/,
+        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
         `At least 8 characters.
       At least one uppercase letter.
       At least one lowercase letter.

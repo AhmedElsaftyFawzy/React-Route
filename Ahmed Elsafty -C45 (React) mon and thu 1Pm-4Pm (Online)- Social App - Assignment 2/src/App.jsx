@@ -13,6 +13,8 @@ import { ProtectedRoute } from "./Components/ProtectedRoute"
 import { PreventiveRoute } from "./Components/PreventiveRoute"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+import UploadPhoto from "./Components/UploadPhoto"
+import ChangePassword from "./Components/ChangePassword"
 
 function App() {
   const queryClient = new QueryClient()
@@ -60,6 +62,10 @@ function App() {
               <Edit></Edit>
             </ProtectedRoute>
           ),
+          children: [
+            { path: "upload", element: <UploadPhoto></UploadPhoto> },
+            { path: "change", element: <ChangePassword></ChangePassword> },
+          ],
         },
         ,
       ],

@@ -3,11 +3,8 @@ import { UserContext } from "../Context/UserContext"
 import { useForm } from "react-hook-form"
 import axios from "axios"
 import toast from "react-hot-toast"
-import { useNavigate } from "react-router-dom"
-import Loading from "./Loading"
 
-export const CreatePost = () => {
-  const navigate = useNavigate()
+export const CreatePost = ({ refetch }) => {
   const { user, loading } = useContext(UserContext)
   const { register, handleSubmit } = useForm()
 
@@ -22,9 +19,11 @@ export const CreatePost = () => {
       })
       .then(() => {
         toast.success("Post Created Successfully")
-        navigate(0)
+        refetch()
       })
-      .catch(({ error }) => toast.error(error || "ERROR Has Happened"))
+      .catch(({ err }) =>
+        toast.error(err.response.data.message || "ERROR Has Happened")
+      )
   }
   return (
     <div className="mt-24 flex justify-center items-center">
@@ -64,7 +63,7 @@ export const CreatePost = () => {
               type="submit"
               className="bg-gray-700 text-white  rounded-xl w-2/4 mx-auto cursor-pointer"
             >
-              Comment
+              Post
             </button>
           </>
         )}

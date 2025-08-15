@@ -78,7 +78,7 @@ export const Navbar = () => {
                     <div className="font-medium dark:text-white">
                       <div>{user.name}</div>
                     </div>
-                    <Link to="/edit" className="ms-5">
+                    <Link to="/edit/upload" className="ms-5">
                       <i className="fa-solid fa-gears dark:text-white"></i>
                     </Link>
                     <button

@@ -1,6 +1,5 @@
 import axios from "axios"
 import { useContext, useEffect, useState } from "react"
-
 import Loading from "../Components/Loading"
 import avatar from "../assets/avatar.png"
 import { Link } from "react-router-dom"
@@ -9,6 +8,8 @@ import { CreatePost } from "../Components/CreatePost"
 import { PostEdit } from "../Components/PostEdit"
 import { UserContext } from "../Context/UserContext"
 import { useQuery } from "@tanstack/react-query"
+import CreateComment from "../Components/CreateComment"
+import { CommentEdit } from "../Components/CommentEdit"
 
 export const Home = () => {
   const [info, setInfo] = useState({ numberOfPages: 1 })
@@ -18,16 +19,18 @@ export const Home = () => {
   let arr = Array(10)
   arr = arr.fill("post")
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch, isError, error } = useQuery({
     queryKey: ["post", page],
     queryFn: async function () {
       return await axios.get(
-        `https://linked-posts.routemisr.com/posts?limit=50&page=${page}&sort=-createdAt`,
+        `https://linked-posts.routemisr.com/posts?limit=10&page=${page}&sort=-createdAt`,
         {
           headers: { token: localStorage.getItem("token") },
         }
       )
     },
+    retry: 5,
+    retryDelay: 5000,
   })
 
   useEffect(() => {
@@ -35,6 +38,14 @@ export const Home = () => {
       setInfo(data.data.paginationInfo)
     }
   }, [data])
+
+  if (isError) {
+    return (
+      <h2 className="mt-20 text-center capitalize text-red-500 font-extrabold text-5xl">
+        {error.response.data.error}
+      </h2>
+    )
+  }
 
   return (
     <>
@@ -48,7 +59,7 @@ export const Home = () => {
         })
       ) : (
         <>
-          <CreatePost></CreatePost>
+          <CreatePost refetch={refetch}></CreatePost>
           {data?.data.posts.map((post) => {
             return (
               <div
@@ -68,7 +79,11 @@ export const Home = () => {
                     </div>
                   </div>
                   {user?._id === post.user._id ? (
-                    <PostEdit postId={post._id} postBody={post.body} />
+                    <PostEdit
+                      postId={post._id}
+                      postBody={post.body}
+                      refetch={refetch}
+                    />
                   ) : null}
                 </div>
                 <p className="dark:text-white py-10">{post.body}</p>
@@ -110,6 +125,21 @@ export const Home = () => {
                           ).toLocaleString()}
                         </p>
                       </div>
+                      {user?._id ===
+                      post.comments[post.comments.length - 1].commentCreator
+                        ._id ? (
+                        <div className="ms-auto me-10">
+                          <CommentEdit
+                            commentId={
+                              post.comments[post.comments.length - 1]._id
+                            }
+                            commentBody={
+                              post.comments[post.comments.length - 1].content
+                            }
+                            refetch={refetch}
+                          ></CommentEdit>
+                        </div>
+                      ) : null}
                     </div>
                     <hr className="w-1/2 mx-auto" />
                     <p className="p-5 ms-5">
@@ -117,6 +147,7 @@ export const Home = () => {
                     </p>
                   </div>
                 ) : null}
+                <CreateComment id={post._id} refetch={refetch}></CreateComment>
               </div>
             )
           })}

@@ -1,33 +1,45 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
-import toast from "react-hot-toast"
 import { Link, useParams } from "react-router-dom"
 import Loading from "./../Components/Loading"
 import avatar from "../assets/avatar.png"
+import { useQuery } from "@tanstack/react-query"
+import CreateComment from "../Components/CreateComment"
+import { useContext } from "react"
+import { UserContext } from "../Context/UserContext"
+import { CommentEdit } from "../Components/CommentEdit"
 
 const PostDetails = () => {
   const param = useParams()
-  const [post, setPost] = useState()
-  const [loading, setLoading] = useState(true)
+  const { user } = useContext(UserContext)
+  const { data, isLoading, isError, error, refetch } = useQuery({
+    queryKey: ["postDetail", param.id],
+    queryFn: getPost,
+    retry: 5,
+    retryDelay: 5000,
+  })
 
-  useEffect(() => {
-    getPost()
-  }, [])
+  const post = data?.data?.post
 
   async function getPost() {
-    await axios
-      .get(`https://linked-posts.routemisr.com/posts/${param.id}`, {
+    return await axios.get(
+      `https://linked-posts.routemisr.com/posts/${param.id}`,
+      {
         headers: { token: localStorage.getItem("token") },
-      })
-      .then((responde) => {
-        setPost(responde.data.post)
-        setLoading(false)
-      })
-      .catch((err) => toast.error("Failed To load The Post"))
+      }
+    )
   }
+
+  if (isError) {
+    return (
+      <h2 className="mt-20 text-center capitalize text-red-500 font-extrabold text-5xl">
+        {error.response.data.error}
+      </h2>
+    )
+  }
+
   return (
     <>
-      {loading ? (
+      {isLoading ? (
         <div className="h-screen flex items-center">
           <Loading></Loading>
         </div>
@@ -36,7 +48,7 @@ const PostDetails = () => {
           <Link to={"/"} className="fixed top-25 left-5">
             <i className="fa-solid fa-arrow-left-long"></i>
           </Link>
-          <div className="mx-auto my-20 max-w-2xl p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+          <div className="mx-auto my-20 max-w-2xl p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 ">
             <div className=" flex justify-start items-center gap-10 dark:text-white">
               <img src={post.user.photo} alt="" className="w-25" />
               <div>
@@ -55,7 +67,7 @@ const PostDetails = () => {
                   <div className=" flex justify-start items-center gap-10 pb-5">
                     <img
                       src={
-                        comment.commentCreator.photo.endsWith("undefined")
+                        comment.commentCreator.photo
                           ? avatar
                           : comment.commentCreator.photo
                       }
@@ -66,12 +78,24 @@ const PostDetails = () => {
                       <p>{comment.commentCreator.name}</p>
                       <p>{new Date(comment.createdAt).toLocaleString()}</p>
                     </div>
+                    {user?._id === comment.commentCreator._id ? (
+                      <div className="ms-auto me-10">
+                        <CommentEdit
+                          commentId={comment._id}
+                          commentBody={
+                            post.comments[post.comments.length - 1].content
+                          }
+                          refetch={refetch}
+                        ></CommentEdit>
+                      </div>
+                    ) : null}
                   </div>
                   <hr className="w-1/2 mx-auto" />
                   <p className="p-5 ms-5">{comment.content}</p>
                 </div>
               )
             })}
+            <CreateComment id={param.id} refetch={refetch}></CreateComment>
           </div>
         </>
       )}
