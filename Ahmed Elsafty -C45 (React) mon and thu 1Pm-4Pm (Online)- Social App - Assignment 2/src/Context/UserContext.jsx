@@ -16,7 +16,7 @@ export function UserProvider(props) {
         setLoading(false)
       })
       .catch((err) => {
-        console.log(err.message)
+        console.log(err)
       })
   }
   return (

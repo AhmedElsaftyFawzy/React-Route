@@ -14,7 +14,7 @@ import { CommentEdit } from "../Components/CommentEdit"
 export const Home = () => {
   const [info, setInfo] = useState({ numberOfPages: 1 })
   const [page, setPage] = useState(info.currentPage || 1)
-  const { user } = useContext(UserContext)
+  const { user, setLoading } = useContext(UserContext)
 
   let arr = Array(10)
   arr = arr.fill("post")
@@ -40,6 +40,7 @@ export const Home = () => {
   }, [data])
 
   if (isError) {
+    setLoading(false)
     return (
       <h2 className="mt-20 text-center capitalize text-red-500 font-extrabold text-5xl">
         {error.response.data.error}
