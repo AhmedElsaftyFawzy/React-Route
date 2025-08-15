@@ -2,7 +2,7 @@ import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import Loading from "../Components/Loading"
 import avatar from "../assets/avatar.png"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import ReactPaginate from "react-paginate"
 import { CreatePost } from "../Components/CreatePost"
 import { PostEdit } from "../Components/PostEdit"
@@ -12,6 +12,7 @@ import CreateComment from "../Components/CreateComment"
 import { CommentEdit } from "../Components/CommentEdit"
 
 export const Home = () => {
+  const navigate = useNavigate()
   const [info, setInfo] = useState({ numberOfPages: 1 })
   const [page, setPage] = useState(info.currentPage || 1)
   const { user, setLoading } = useContext(UserContext)
@@ -41,6 +42,7 @@ export const Home = () => {
 
   if (isError) {
     setLoading(false)
+    navigate("/login")
     return (
       <h2 className="mt-20 text-center capitalize text-red-500 font-extrabold text-5xl">
         {error.response.data.error}
