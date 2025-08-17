@@ -15,6 +15,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import UploadPhoto from "./Components/UploadPhoto"
 import ChangePassword from "./Components/ChangePassword"
+import UserPage from "./Pages/UserPage"
 
 function App() {
   const queryClient = new QueryClient()
@@ -55,6 +56,7 @@ function App() {
             </PreventiveRoute>
           ),
         },
+        { path: "/user", element: <UserPage></UserPage> },
         {
           path: "/edit",
           element: (

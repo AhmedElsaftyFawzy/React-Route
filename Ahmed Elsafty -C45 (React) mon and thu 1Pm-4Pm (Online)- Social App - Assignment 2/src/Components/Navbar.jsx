@@ -70,14 +70,17 @@ export const Navbar = () => {
               ) : user ? (
                 <>
                   <div className="flex items-center gap-4">
-                    <img
-                      className="w-10 h-10 rounded-full"
-                      src={user.photo}
-                      alt=""
-                    />
-                    <div className="font-medium dark:text-white">
-                      <div>{user.name}</div>
-                    </div>
+                    <Link className="flex items-center gap-4" to="/user">
+                      <img
+                        className="w-10 h-10 rounded-full"
+                        src={user.photo}
+                        alt=""
+                      />
+                      <div className="font-medium dark:text-white">
+                        <div>{user.name}</div>
+                      </div>
+                    </Link>
+
                     <Link to="/edit/upload" className="ms-5">
                       <i className="fa-solid fa-gears dark:text-white"></i>
                     </Link>
