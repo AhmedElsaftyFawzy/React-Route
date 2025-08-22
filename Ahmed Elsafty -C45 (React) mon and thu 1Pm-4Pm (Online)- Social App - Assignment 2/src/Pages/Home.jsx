@@ -95,7 +95,6 @@ export const Home = () => {
                   {post.image ? <img src={post.image} alt="" /> : null}
                 </div>
                 <Link
-                  key={post._id}
                   to={`/post/${post._id}`}
                   className="text-gray-400 flex justify-end my-5 cursor-pointer"
                 >

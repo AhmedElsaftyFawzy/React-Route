@@ -19,7 +19,7 @@ const UserPage = () => {
   let arr = Array(10)
   arr = arr.fill("post")
   const { data, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["post", page],
+    queryKey: ["userPost", page],
     queryFn: async function () {
       return await axios.get(
         `https://linked-posts.routemisr.com/users/${user._id}/posts?limit=10`,
@@ -88,7 +88,6 @@ const UserPage = () => {
                   {post.image ? <img src={post.image} alt="" /> : null}
                 </div>
                 <Link
-                  key={post._id}
                   to={`/post/${post._id}`}
                   className="text-gray-400 flex justify-end my-5 cursor-pointer"
                 >
