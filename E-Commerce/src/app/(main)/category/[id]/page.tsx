@@ -31,7 +31,9 @@ export default async function page({ params }: { params: { id: string } }) {
         </div>
       ) : (
         <div className="my-5 bg-red-500">
-          <h3>There Is No SubCategory</h3>
+          <h3 className="p-5 text-center text-white font-extrabold">
+            There Is No SubCategory
+          </h3>
         </div>
       )}
     </>
