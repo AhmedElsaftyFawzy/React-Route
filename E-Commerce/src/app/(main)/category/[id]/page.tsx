@@ -2,13 +2,15 @@ import { Card } from "@/components/ui/card"
 import { getAllSubCategories } from "@/services/category.services"
 import { CategoryData } from "@/types/categoryData"
 import { Metadata } from "next"
+import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "SubCategory",
 }
 
 export default async function page({ params }: { params: { id: string } }) {
-  const id = await params.id
+  const param = await params
+  const id = param.id
   const res: CategoryData = await getAllSubCategories(id)
   return (
     <>
@@ -21,9 +23,11 @@ export default async function page({ params }: { params: { id: string } }) {
                 className="relative lg:col-span-2 md:col-span-4 sm:col-span-6 col-span-12 rounded-4xl h-50 overflow-hidden"
               >
                 <div className="absolute inset-0 bg-black/50 flex justify-center items-center">
-                  <h2 className="text-white text-lg font-semibold">
-                    {category.name}
-                  </h2>
+                  <Link href={`/category/${id}/${category._id}`}>
+                    <h2 className="text-white text-lg font-semibold">
+                      {category.name}
+                    </h2>
+                  </Link>
                 </div>
               </Card>
             )
