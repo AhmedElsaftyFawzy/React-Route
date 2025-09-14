@@ -99,7 +99,9 @@ export default function Navbar() {
                 Welcome {data?.user?.name}
               </h2>
             </Link>
-            <Button onClick={logout}>Logout</Button>
+            <Button onClick={logout} className="cursor-pointer">
+              Logout
+            </Button>
           </div>
         ) : (
           <div className="hidden lg:flex items-center gap-4">
