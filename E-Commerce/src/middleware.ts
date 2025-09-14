@@ -4,14 +4,20 @@ import type { NextRequest } from "next/server"
 
 export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request })
-  if (token) {
-    return NextResponse.next()
-  } else {
+  const path = request.nextUrl.pathname
+
+  const isAuthPage = path === "/login" || path === "/register"
+  if (token && isAuthPage) {
+    return NextResponse.redirect(new URL("/", request.url))
+  }
+
+  if (!token && ["/cart", "/wishList", "/allorders"].includes(path)) {
     return NextResponse.redirect(new URL("/login", request.url))
   }
+
+  return NextResponse.next()
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/cart", "/wishList", "/allorders"],
+  matcher: ["/cart", "/wishList", "/allorders", "/login", "/register"],
 }
