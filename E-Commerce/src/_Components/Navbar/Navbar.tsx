@@ -33,6 +33,7 @@ export default function Navbar() {
     { path: "/product", content: "Products", protected: false },
     { path: "/category", content: "Categories", protected: false },
     { path: "/brand", content: "Brands", protected: false },
+    { path: "/search", content: "Search", protected: false },
   ]
 
   const authLinks = [
