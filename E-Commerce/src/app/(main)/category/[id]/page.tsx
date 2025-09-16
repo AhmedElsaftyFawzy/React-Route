@@ -13,7 +13,7 @@ export default async function page({ params }: { params: { id: string } }) {
   const id = param.id
   const res: CategoryData = await getAllSubCategories(id)
   return (
-    <>
+    <div className="min-h-screen">
       {res.data.length > 0 ? (
         <div className="grid grid-cols-12 gap-5 my-5 px-5">
           {res?.data.map((category) => {
@@ -40,6 +40,6 @@ export default async function page({ params }: { params: { id: string } }) {
           </h3>
         </div>
       )}
-    </>
+    </div>
   )
 }

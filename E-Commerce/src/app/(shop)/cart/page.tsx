@@ -87,7 +87,7 @@ export default function Page() {
   }
 
   return (
-    <>
+    <div className="min-h-screen">
       {pageloading ? (
         <PageLoading />
       ) : cart?.data?.products?.length ? (
@@ -259,6 +259,6 @@ export default function Page() {
           <h3 className="text-center text-white">The Cart Is Empty</h3>
         </div>
       )}
-    </>
+    </div>
   )
 }

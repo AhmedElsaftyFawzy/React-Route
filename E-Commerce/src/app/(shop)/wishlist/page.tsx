@@ -21,7 +21,7 @@ export default async function Page() {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-6 p-10">
+    <div className="grid grid-cols-1 gap-6 p-10 min-h-screen">
       {products.map((product) => (
         <Card key={product._id} className="grid grid-cols-12 gap-10">
           <div className="col-span-3 md:col-span-4 lg:col-span-6">

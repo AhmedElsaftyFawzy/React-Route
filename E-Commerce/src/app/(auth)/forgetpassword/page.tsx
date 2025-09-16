@@ -58,7 +58,7 @@ export default function Page() {
     }
   }
   return (
-    <div className="w-8/12 mx-auto my-10 shadow-2xl p-5">
+    <div className="w-8/12 mx-auto my-10 shadow-2xl p-5 min-h-screen">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField

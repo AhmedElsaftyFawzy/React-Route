@@ -9,7 +9,7 @@ export default async function Page() {
   const res = await getUserOrder()
 
   return (
-    <>
+    <div className="min-h-screen">
       {res?.length > 0 ? (
         res.map((data) => {
           return (
@@ -97,6 +97,6 @@ export default async function Page() {
           <h3 className="text-center text-white">The Order Is Empty</h3>
         </div>
       )}
-    </>
+    </div>
   )
 }

@@ -59,7 +59,7 @@ export default function InputOTPForm() {
   }
 
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-screen flex justify-center items-center min-h-screen">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

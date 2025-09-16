@@ -8,18 +8,12 @@ import React, { Suspense } from "react"
 export const metadata: Metadata = {
   title: "SubCategory",
 }
-export default async function page({
-  params,
-}: {
-  params: { subcategoryId: string }
-}) {
+export default async function page({ params }: { params: { id: string } }) {
   const param = await params
-  const id = param.subcategoryId
+  const id = param.id
   const respondData: Product = await getAllProduct()
   const productList: ProductData[] = respondData.data
-  const selectedProduct = productList.filter((item) =>
-    item.subcategory.some((sub) => sub._id == id)
-  )
+  const selectedProduct = productList.filter((item) => item.brand._id == id)
 
   return (
     <div className="min-h-screen">

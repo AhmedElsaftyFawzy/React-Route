@@ -13,6 +13,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination"
 import { Metadata } from "next"
+import Link from "next/link"
 
 type PageProps = {
   searchParams: {
@@ -65,7 +66,11 @@ export default async function Page({ searchParams }: PageProps) {
               priority={pageNum === 1} // prioritize images on first page
             />
             <div className="absolute inset-0 bg-black/50 flex justify-center items-center">
-              <h2 className="text-white text-lg font-semibold">{brand.name}</h2>
+              <Link href={`/brand/${brand._id}`}>
+                <h2 className="text-white text-lg font-semibold">
+                  {brand.name}
+                </h2>
+              </Link>
             </div>
           </Card>
         ))}
